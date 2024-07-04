@@ -10,8 +10,8 @@ export default function App() {
 
   //custom hooks
  const currencyInfo = useCurrencyInfo(from)
-//  const options = Object.keys(currencyInfo)
-const options = currencyInfo ? Object.keys(currencyInfo) : [];
+ const options = Object.keys(currencyInfo)
+// const options = currencyInfo ? Object.keys(currencyInfo) : [];
 
  const swap =() =>{
   setFrom(to)
@@ -38,8 +38,19 @@ const options = currencyInfo ? Object.keys(currencyInfo) : [];
             onCurrencyChange={(currency)=> setFrom(currency)} 
             onAmountChange={(amount)=>setAmount(amount)} 
             selectedCurrency={from} />
-
           </div>
+         <div className="relative w-full h-0.5">
+          <button className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5" onClick={swap}>Swap</button>
+         </div>
+         <div className="w-full mb-1"> 
+            <InputBox  label="to" amount={convertedAmount}  
+            currencyOptions={options} 
+            onCurrencyChange={(currency)=> setTo(currency)} 
+            selectedCurrency={to}
+            amountDisabled />
+          </div>
+          <button type="submit" className="w-full bg-blue-600 px-4 py-3 rounded-lg">Convert {from.toUpperCase()} to {to.toUpperCase()}</button>
+
          </form>
         </div>
       </div>
